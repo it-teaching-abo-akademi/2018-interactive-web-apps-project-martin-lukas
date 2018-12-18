@@ -60,10 +60,18 @@ class Portfolio extends Component {
 
     handleSubmit = stock => {
         stock.symbol = stock.symbol.toUpperCase();
-        this.setState({
-            data: [...this.state.data, stock],
-            submitted: true
+        let exists = false;
+        this.state.data.forEach(function(st) {
+            if (st.symbol === stock.symbol) {
+                exists = true;
+            }
         });
+        if (!exists) {
+            this.setState({
+                data: [...this.state.data, stock],
+                submitted: true
+            });
+        }
         // this.props.addStockToPortfolio(entry);
     };
 

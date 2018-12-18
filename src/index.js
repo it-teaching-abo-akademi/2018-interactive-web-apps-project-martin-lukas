@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './style.css';
 import Portfolio from './Portfolio';
 import AddPortfolioForm from './AddPortfolioForm';
 
@@ -31,17 +31,22 @@ class App extends Component {
         }
     };
 
-    // addStockToPortfolio = stock => {
-    //
-    // };
+    addStockToPortfolio = (name, stock) => {
+
+    };
+
+    getPortfolio(name) {
+
+        return
+    }
 
     render() {
-        const objects = this.state.portfolios.map((portfolio, index) => {
+        const objects = this.state.portfolios.map((portfolio) => {
             return (
                 <Portfolio
                     name={portfolio.name}
                     data={portfolio.data}
-                    key={index}
+                    key={portfolio.name}
                     removePortfolio={this.removePortfolio}
                     // addStockToPortfolio={this.addStockToPortfolio}
                 />
