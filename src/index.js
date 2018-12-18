@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './style.css';
 import Portfolio from './Portfolio';
 import AddPortfolioForm from './AddPortfolioForm';
-import {setCookie, getCookie, eraseCookie} from './utils';
+import {setCookie, getCookie} from './utils';
 
 class App extends Component {
     constructor(props) {
@@ -26,17 +26,19 @@ class App extends Component {
     };
 
     handleSubmit = portfolio => {
-        let exists = false;
-        this.state.portfolios.forEach(function(portf) {
-            if (portf.name === portfolio.name) {
-                exists = true;
-            }
-        });
-        if (!exists) {
-            const newPortfolios = [...this.state.portfolios, portfolio];
-            this.setState({
-                portfolios: newPortfolios
+        if (this.state.portfolios.length < 10) {
+            let exists = false;
+            this.state.portfolios.forEach(function (portf) {
+                if (portf.name === portfolio.name) {
+                    exists = true;
+                }
             });
+            if (!exists) {
+                const newPortfolios = [...this.state.portfolios, portfolio];
+                this.setState({
+                    portfolios: newPortfolios
+                });
+            }
         }
     };
 
@@ -72,10 +74,12 @@ class App extends Component {
         );
     }
 }
+
 let cookie = getCookie("portfolios");
 if (cookie == null) {
     cookie = [];
 } else {
     cookie = JSON.parse(cookie);
 }
+
 ReactDOM.render(<App data={cookie}/>, document.getElementById("root"));

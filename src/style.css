@@ -1,9 +1,32 @@
-.global {
-    margin: 0 auto;
-    width: 880px;
+html, body, div, button, p, a, img, ul, li, form,
+label, table, tbody, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
-@media only screen and (max-width: 880px) {
+* {
+    box-sizing: border-box;
+}
+
+.global {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 10px;
+    width: 900px;
+    font: normal 14px Arial, sans-serif;
+}
+
+label {
+    padding-right: 5px;
+}
+
+@media only screen and (max-width: 900px) {
     .global {
         width: 100%;
     }
@@ -17,7 +40,7 @@
 
 .portfolio-form {
     margin: 15px auto;
-    max-width: 320px;
+    max-width: 310px;
 }
 
 .portfolios-container {
@@ -27,27 +50,64 @@
 }
 
 .portfolio-element {
-    max-width: 450px;
-    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 430px;
+    margin: 10px;
     border: 1px solid black;
+    border-radius: 5px;
 }
 
 .portfolio-header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 .portfolio-name {
     font-weight: bold;
-    margin-left: 15px;
-}
-
-.portfolio-delete {
+    font-size: 17px;
     margin: 15px;
 }
 
-label {
-    padding-right: 5px;
+.del-portfolio {
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background: url(del-button.png) no-repeat;
+}
+
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+table {
+    width: 370px;
+}
+
+.scroll {
+    overflow-y: scroll;
+    height: 105px;
+}
+
+th {
+    font-weight: bold;
+    background-color: lightgray;
+}
+
+th, td {
+    height: 26px;
+}
+
+.empty-row {
+    height: 18px;
 }
 
 .total-sum {
@@ -69,3 +129,4 @@ label {
 .quantity-input-field {
     width: 40px;
 }
+

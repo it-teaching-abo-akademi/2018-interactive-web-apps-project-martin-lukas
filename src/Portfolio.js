@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Table from "./Table";
 import AddStockForm from "./AddStockForm";
-// import {setCookie, getCookie, eraseCookie} from './utils';
 
 const API = "R2XFYH8AEAQTGTHE";
 
@@ -15,40 +14,6 @@ class Portfolio extends Component {
     }
 
     componentDidUpdate() {
-        if (this.state.submitted) {
-            let that = this;
-            let data = this.state.data;
-            let newestStock = null;
-            const len = data.length;
-            if (len !== 0) {
-                newestStock = data[len - 1];
-            }
-            if (newestStock !== null) {
-                let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${newestStock.symbol}&outputsize=compact&apikey=${API}`;
-                let xhr = new XMLHttpRequest();
-                xhr.open("GET", url, true);
-                xhr.onload = function (e) {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            let result = JSON.parse(xhr.responseText);
-                            console.log(result);
-                            const tsObj = result["Time Series (Daily)"];
-                            const dates = Object.keys(tsObj);
-                            newestStock.value = parseFloat(tsObj[dates[0]]["4. close"]).toFixed(2);
-                            data[len-1] = newestStock;
-                            that.props.updateStockCookie(that.props.name, data);
-                            that.setState({
-                                data: data,
-                                submitted: false
-                            });
-                        } else {
-                            console.error(xhr.statusText);
-                        }
-                    }
-                };
-                xhr.send();
-            }
-        }
     }
 
     removeStock = index => {
@@ -60,19 +25,44 @@ class Portfolio extends Component {
     };
 
     handleSubmit = stock => {
-        stock.symbol = stock.symbol.toUpperCase();
-        let exists = false;
-        this.state.data.forEach(function(st) {
-            if (st.symbol === stock.symbol) {
-                exists = true;
+        let that = this;
+        let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stock.symbol}&outputsize=compact&apikey=${API}`;
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onload = function (e) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    let result = JSON.parse(xhr.responseText);
+                    const tsObj = result["Time Series (Daily)"];
+                    if (typeof tsObj !== "undefined") {
+                        const dates = Object.keys(tsObj);
+                        stock.value = parseFloat(tsObj[dates[0]]["4. close"]).toFixed(2);
+                        stock.symbol = stock.symbol.toUpperCase();
+                        let newData = that.state.data;
+                        let exists = false;
+                        newData.forEach(function (st) {
+                            if (st.symbol === stock.symbol) {
+                                exists = true;
+                                st.value = stock.value;
+                                st.quantity = stock.quantity;
+                            }
+                        });
+                        if (!exists) {
+                            newData = [...that.state.data, stock];
+                        }
+                        if (newData.length <= 50) {
+                            that.setState({
+                                data: newData
+                            });
+                        }
+                        that.props.updateStockCookie(that.props.name, newData);
+                    }
+                } else {
+                    console.error(xhr.statusText);
+                }
             }
-        });
-        if (!exists) {
-            this.setState({
-                data: [...this.state.data, stock],
-                submitted: true
-            });
-        }
+        };
+        xhr.send();
     };
 
     totalStockValue = () => {
@@ -89,13 +79,16 @@ class Portfolio extends Component {
             <div className="portfolio-element">
                 <div className="portfolio-header">
                     <p className="portfolio-name">{this.props.name}</p>
-                    <button onClick={() => this.props.removePortfolio(this.props.name)}>X</button>
+                    <button
+                        className="del-portfolio"
+                        onClick={() => this.props.removePortfolio(this.props.name)}
+                    />
                 </div>
                 <Table
                     data={this.state.data}
                     removeStock={this.removeStock}
                 />
-                <p className="total-sum">Total value of {this.props.name}: {this.totalStockValue()}</p>
+                <p className="total-sum">Total value of <b>{this.props.name}</b>: {this.totalStockValue()}</p>
                 <AddStockForm handleSubmit={this.handleSubmit} />
             </div>
         );

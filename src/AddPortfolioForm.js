@@ -25,7 +25,6 @@ class AddPortfolioForm extends Component {
 
     render() {
         return (
-            <div className="portfolio-form">
                 <form onSubmit={e => { e.preventDefault(); }}>
                     <label>Name:</label>
                     <input
@@ -39,7 +38,6 @@ class AddPortfolioForm extends Component {
                         value="Add portfolio"
                         onClick={this.submitForm} />
                 </form>
-            </div>
         );
     }
 }
