@@ -20,7 +20,7 @@ class AddStockForm extends Component {
     };
 
     submitForm = () => {
-        if (!(this.state.symbol === '' || this.state.quantity === '')) {
+        if (this.state.symbol !== '' && this.state.quantity !== '' && !isNaN(this.state.quantity)) {
             this.props.handleSubmit(this.state);
             this.setState(this.initialState);
         }

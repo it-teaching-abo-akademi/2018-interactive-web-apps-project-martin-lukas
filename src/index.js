@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './style.css';
 import Portfolio from './Portfolio';
 import AddPortfolioForm from './AddPortfolioForm';
+import {setCookie, getCookie, eraseCookie} from './utils';
 
 class App extends Component {
-    state = {
-        portfolios: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            portfolios: props.data
+        };
+    }
+
+    componentDidUpdate() {
+        setCookie("portfolios", JSON.stringify(this.state.portfolios));
     };
 
     removePortfolio = name => {
@@ -25,20 +33,22 @@ class App extends Component {
             }
         });
         if (!exists) {
+            const newPortfolios = [...this.state.portfolios, portfolio];
             this.setState({
-                portfolios: [...this.state.portfolios, portfolio]
+                portfolios: newPortfolios
             });
         }
     };
 
-    addStockToPortfolio = (name, stock) => {
-
+    updateStockCookie = (name, newStockData) => {
+        let ports = this.state.portfolios;
+        for (let i = 0; i < ports.length; i++) {
+            if (ports[i].name === name) {
+                ports[i].data = newStockData;
+            }
+        }
+        setCookie("portfolios", JSON.stringify(ports));
     };
-
-    getPortfolio(name) {
-
-        return
-    }
 
     render() {
         const objects = this.state.portfolios.map((portfolio) => {
@@ -48,7 +58,7 @@ class App extends Component {
                     data={portfolio.data}
                     key={portfolio.name}
                     removePortfolio={this.removePortfolio}
-                    // addStockToPortfolio={this.addStockToPortfolio}
+                    updateStockCookie={this.updateStockCookie}
                 />
             );
         });
@@ -62,5 +72,10 @@ class App extends Component {
         );
     }
 }
-
-ReactDOM.render(<App />, document.getElementById("root"));
+let cookie = getCookie("portfolios");
+if (cookie == null) {
+    cookie = [];
+} else {
+    cookie = JSON.parse(cookie);
+}
+ReactDOM.render(<App data={cookie}/>, document.getElementById("root"));

@@ -28,12 +28,7 @@ const TableHeader = () => {
 
 const TableBody = props => {
     const stocks = props.data.map((stock, index) => {
-        let totalVal = 0;
-        if (!isNaN(stock.quantity) && stock.value !== '') {
-            totalVal = (parseFloat(stock.quantity) * stock.value).toFixed(2);
-        } else {
-            totalVal = String(NaN);
-        }
+        let totalVal = (parseFloat(stock.quantity) * stock.value).toFixed(2);
         return (
             <tr key={index}>
                 <td>{stock.symbol}</td>

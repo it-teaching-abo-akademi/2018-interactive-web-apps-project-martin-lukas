@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Table from "./Table";
 import AddStockForm from "./AddStockForm";
+// import {setCookie, getCookie, eraseCookie} from './utils';
 
 const API = "R2XFYH8AEAQTGTHE";
 
@@ -30,10 +31,12 @@ class Portfolio extends Component {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
                             let result = JSON.parse(xhr.responseText);
+                            console.log(result);
                             const tsObj = result["Time Series (Daily)"];
                             const dates = Object.keys(tsObj);
                             newestStock.value = parseFloat(tsObj[dates[0]]["4. close"]).toFixed(2);
                             data[len-1] = newestStock;
+                            that.props.updateStockCookie(that.props.name, data);
                             that.setState({
                                 data: data,
                                 submitted: false
@@ -44,8 +47,6 @@ class Portfolio extends Component {
                     }
                 };
                 xhr.send();
-            } else {
-                console.log("Didn't fetch the data from API");
             }
         }
     }
@@ -72,17 +73,16 @@ class Portfolio extends Component {
                 submitted: true
             });
         }
-        // this.props.addStockToPortfolio(entry);
     };
 
-    totalStockValue() {
+    totalStockValue = () => {
         let sum = 0;
-        let data = this.props.data;
+        let data = this.state.data;
         for (let i = 0; i < data.length; i++) {
             sum += parseFloat(data[i].value) * parseInt(data[i].quantity);
         }
         return sum.toFixed(2);
-    }
+    };
 
     render() {
         return (
