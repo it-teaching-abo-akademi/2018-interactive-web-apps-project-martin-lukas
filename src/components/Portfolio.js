@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Table from "./Table";
 import AddStockForm from "./AddStockForm";
+import ChartPopup from './ChartPopup';
 
 const API = "R2XFYH8AEAQTGTHE";
 
@@ -74,6 +75,19 @@ class Portfolio extends Component {
         return sum.toFixed(2);
     };
 
+    // getChartData = () => {
+    //     let chartData = {
+    //         labels: [],
+    //         data: []
+    //     };
+    //     const stocks = this.state.data;
+    //     for (let i = 0; i < stocks.length; i++) {
+    //         chartData.labels.push(stocks[i].symbol);
+    //         chartData.data.push(stocks[i].value);
+    //     }
+    //     return chartData;
+    // };
+
     render() {
         return (
             <div className="portfolio-element">
@@ -90,6 +104,7 @@ class Portfolio extends Component {
                 />
                 <p className="total-sum">Total value of <b>{this.props.name}</b>: {this.totalStockValue()}</p>
                 <AddStockForm handleSubmit={this.handleSubmit} />
+                <ChartPopup data={this.state.data} />
             </div>
         );
     }

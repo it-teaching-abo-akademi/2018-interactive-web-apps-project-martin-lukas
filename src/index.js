@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
-import Portfolio from './Portfolio';
-import AddPortfolioForm from './AddPortfolioForm';
+import Portfolio from './components/Portfolio';
+import AddPortfolioForm from './components/AddPortfolioForm';
 import {setCookie, getCookie} from './utils';
 
 class App extends Component {
@@ -64,6 +64,7 @@ class App extends Component {
                 />
             );
         });
+
         return (
             <div className="global">
                 <AddPortfolioForm handleSubmit={this.handleSubmit} />

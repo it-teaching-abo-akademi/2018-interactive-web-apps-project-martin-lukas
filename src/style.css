@@ -1,4 +1,4 @@
-html, body, div, button, p, a, img, ul, li, form,
+html, body, div, p, a, img, ul, li, form,
 label, table, tbody, thead, tr, th, td {
     margin: 0;
     padding: 0;
@@ -57,6 +57,7 @@ label {
     margin: 10px;
     border: 1px solid black;
     border-radius: 5px;
+    padding-bottom: 5px;
 }
 
 .portfolio-header {
@@ -73,11 +74,24 @@ label {
 }
 
 .del-portfolio {
+    padding: 0;
+    border: 0;
     margin: 5px;
     width: 20px;
     height: 20px;
     border-radius: 20px;
-    background: url(del-button.png) no-repeat;
+    background: url(components/del-portfolio.png) no-repeat;
+}
+
+.del-row {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background: url(components/del-row.png) no-repeat;
+    vertical-align: middle;
 }
 
 table, td, th {
@@ -115,7 +129,7 @@ th, td {
 }
 
 .stock-form {
-    margin: 15px;
+    margin: 15px 15px 5px 15px;
 }
 
 .name-input-field, .symbol-input-field, .quantity-input-field {
@@ -130,3 +144,6 @@ th, td {
     width: 40px;
 }
 
+.chart {
+    height: 300px;
+}

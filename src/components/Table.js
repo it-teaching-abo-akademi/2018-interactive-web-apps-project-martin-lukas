@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './style.css';
+import '../style.css';
 
 class Table extends Component {
     render() {
@@ -40,7 +40,7 @@ const TableBody = props => {
                 <td>{stock.quantity}</td>
                 <td>{totalVal}</td>
                 <td>
-                    <button onClick={() => props.removeStock(index)}>X</button>
+                    <button className="del-row" onClick={() => props.removeStock(index)} />
                 </td>
             </tr>
         );
