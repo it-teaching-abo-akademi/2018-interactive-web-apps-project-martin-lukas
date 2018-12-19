@@ -2,6 +2,9 @@
 
 ## SPMS - Stock Portfolio Management System
 This project is SPMS for managing your portfolios.
+
+URL: https://it-teaching-abo-akademi.github.io/2018-interactive-web-apps-project-martin-lukas/
+
 The apps capabilities:
 - add/remove portfolios (up to 10)
 - add/remove stocks in a portfolio (up to 50)

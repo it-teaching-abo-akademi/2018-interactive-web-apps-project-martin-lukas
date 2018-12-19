@@ -27,7 +27,7 @@ label {
     padding-right: 5px;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 940px) {
     .global {
         width: 100%;
     }

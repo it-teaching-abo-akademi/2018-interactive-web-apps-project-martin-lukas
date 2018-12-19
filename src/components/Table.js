@@ -7,9 +7,7 @@ class Table extends Component {
             <div className="scroll">
             <table>
                 <TableHeader />
-
-                    <TableBody data={this.props.data} removeStock={this.props.removeStock} />
-
+                <TableBody data={this.props.data} removeStock={this.props.removeStock} />
             </table>
             </div>
         );
@@ -45,6 +43,7 @@ const TableBody = props => {
             </tr>
         );
     });
+    // Filling in the rest of the table with empty rows
     for (let i = props.data.length; i < 50; i++) {
         stocks.push((
             <tr className="empty-row" key={i}><td /><td /><td /><td /><td /></tr>
