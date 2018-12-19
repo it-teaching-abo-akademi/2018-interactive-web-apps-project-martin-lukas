@@ -1,7 +1,7 @@
 {
   "name": "spms-app",
   "version": "0.1.0",
-  "homepage": "https://martin-lukas.github.io/spms-app/",
+  "homepage": "https://it-teaching-abo-akademi.github.io/2018-interactive-web-apps-project-martin-lukas/",
   "private": true,
   "dependencies": {
     "chart.js": "^2.7.3",
