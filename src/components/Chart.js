@@ -32,9 +32,8 @@ class Chart extends Component {
             symbols.push(data[i].symbol);
             colors.push(this.getRandomColor());
         }
-        let datasets = [];
-        for (let i = 0; i < symbols.length; i++){
-            let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&outputsize=compact&apikey=${API}`;
+        for (let i = 0; i < symbols.length; i++) {
+            let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&outputsize=full&apikey=${API}`;
             let xhr = new XMLHttpRequest();
             xhr.open("GET", url, true);
             xhr.onload = function (e) {
@@ -42,6 +41,7 @@ class Chart extends Component {
                     if (xhr.status === 200) {
                         let result = JSON.parse(xhr.responseText);
                         const tsObj = result["Time Series (Daily)"];
+                        console.log(tsObj);
                         if (typeof tsObj !== "undefined") {
                             let dates = Object.keys(tsObj);
                             let dataset = {
@@ -53,16 +53,12 @@ class Chart extends Component {
                             for (let j = 0; j < dates.length; j++) {
                                 dataset.data.push(parseFloat(tsObj[dates[j]]["4. close"]).toFixed(2));
                             }
-                            datasets.push(dataset);
-                            if (i === symbols.length-1) {
-                                console.log(datasets);
-                                that.setState({
-                                    data: {
-                                        labels: dates,
-                                        datasets: datasets
-                                    }
-                                });
-                            }
+                            that.setState({
+                                data: {
+                                    labels: dates,
+                                    datasets: [...that.state.data.datasets, dataset]
+                                }
+                            });
                         }
                     } else {
                         console.error(xhr.statusText);
@@ -73,14 +69,14 @@ class Chart extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps){
-        if (nextProps.labels !== this.props.labels) {
-            this.setState({ labels: nextProps.labels })
-        }
-        if (nextProps.data !== this.props.data) {
-            this.setState({ data: nextProps.data })
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     if (nextProps.labels !== this.props.labels) {
+    //         this.setState({ labels: nextProps.labels })
+    //     }
+    //     if (nextProps.data !== this.props.data) {
+    //         this.setState({ data: nextProps.data })
+    //     }
+    // }
 
     render() {
         return (

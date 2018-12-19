@@ -3,9 +3,6 @@ import Popup from 'reactjs-popup';
 import Chart from './Chart';
 
 class ChartPopup extends Component {
-
-
-
     render() {
         return(
             <Popup
