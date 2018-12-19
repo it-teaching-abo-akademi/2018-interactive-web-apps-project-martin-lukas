@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/2018-interactive-web-apps-project-martin-lukas/static/js/runtime~main.5d057912.js"
   },
   {
-    "revision": "f7d7e8cf15b3ecec0143",
-    "url": "/2018-interactive-web-apps-project-martin-lukas/static/js/main.f7d7e8cf.chunk.js"
+    "revision": "ee453929d120ff5e162c",
+    "url": "/2018-interactive-web-apps-project-martin-lukas/static/js/main.ee453929.chunk.js"
   },
   {
     "revision": "e0f7769fcf4385d0caa2",
     "url": "/2018-interactive-web-apps-project-martin-lukas/static/js/1.e0f7769f.chunk.js"
   },
   {
-    "revision": "f7d7e8cf15b3ecec0143",
-    "url": "/2018-interactive-web-apps-project-martin-lukas/static/css/main.5b1b2ce9.chunk.css"
+    "revision": "ee453929d120ff5e162c",
+    "url": "/2018-interactive-web-apps-project-martin-lukas/static/css/main.15d52e12.chunk.css"
   },
   {
-    "revision": "418c9e0e8a8eb85fa76a3ce8cf9a2955",
+    "revision": "4c06e7ccc87239342c12df0507947414",
     "url": "/2018-interactive-web-apps-project-martin-lukas/index.html"
   }
 ];
