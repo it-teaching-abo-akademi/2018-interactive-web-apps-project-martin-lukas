@@ -27,6 +27,7 @@ class App extends Component {
 
     handleSubmit = portfolio => {
         if (this.state.portfolios.length < 10) {
+            // Testing if portfolio with this name already exists
             let exists = false;
             this.state.portfolios.forEach(function (portf) {
                 if (portf.name === portfolio.name) {
@@ -76,6 +77,7 @@ class App extends Component {
     }
 }
 
+// Setting the starting props for the app (either from cookie, or empty array)
 let cookie = getCookie("portfolios");
 if (cookie == null) {
     cookie = [];

@@ -14,15 +14,6 @@ class Chart extends Component {
         }
     }
 
-    getRandomColor = () => {
-        let letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    };
-
     componentDidMount() {
         let that = this;
         let data = this.props.data;
@@ -32,6 +23,8 @@ class Chart extends Component {
             symbols.push(data[i].symbol);
             colors.push(this.getRandomColor());
         }
+        // AJAX request loop. Sets state to the responses.
+        // TODO There is a problem with timing I think. Not everytime do all the responses get rendered into the graph.
         for (let i = 0; i < symbols.length; i++) {
             let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&outputsize=compact&apikey=${API}`;
             let xhr = new XMLHttpRequest();
@@ -41,7 +34,6 @@ class Chart extends Component {
                     if (xhr.status === 200) {
                         let result = JSON.parse(xhr.responseText);
                         const tsObj = result["Time Series (Daily)"];
-                        console.log(tsObj);
                         if (typeof tsObj !== "undefined") {
                             let dates = Object.keys(tsObj);
                             let dataset = {
@@ -69,14 +61,14 @@ class Chart extends Component {
         }
     }
 
-    // componentWillReceiveProps(nextProps){
-    //     if (nextProps.labels !== this.props.labels) {
-    //         this.setState({ labels: nextProps.labels })
-    //     }
-    //     if (nextProps.data !== this.props.data) {
-    //         this.setState({ data: nextProps.data })
-    //     }
-    // }
+    getRandomColor = () => {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
 
     render() {
         return (
@@ -90,7 +82,6 @@ class Chart extends Component {
                             text: 'Comparison of stock values',
                             fontSize: 20
                         },
-
                         elements: {
                             point:{
                                 radius: 0

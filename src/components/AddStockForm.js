@@ -13,12 +13,14 @@ class AddStockForm extends Component {
         this.state = this.initialState;
     }
 
+    // The state is updated every time the field values change
     handleChange = event => {
         this.setState({
             [event.target.name] : event.target.value
         });
     };
 
+    // Submit only with non-empty fields, or when the quantity is a number
     submitForm = () => {
         if (this.state.symbol !== '' && this.state.quantity !== '' && !isNaN(this.state.quantity)) {
             this.props.handleSubmit(this.state);

@@ -1,3 +1,4 @@
+/* CSS reset */
 html, body, div, p, a, img, ul, li, form,
 label, table, tbody, thead, tr, th, td {
     margin: 0;
@@ -125,7 +126,7 @@ th, td {
 }
 
 .total-sum {
-    margin: 15px 15px 0px 15px;
+    margin: 15px 15px 0 15px;
 }
 
 .stock-form {

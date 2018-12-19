@@ -14,9 +14,6 @@ class Portfolio extends Component {
         };
     }
 
-    componentDidUpdate() {
-    }
-
     removeStock = index => {
         this.setState({
             data: this.state.data.filter((stock, i) => {
@@ -37,10 +34,12 @@ class Portfolio extends Component {
                     const tsObj = result["Time Series (Daily)"];
                     if (typeof tsObj !== "undefined") {
                         const dates = Object.keys(tsObj);
+                        // Taking the first (most current) value of the stock, specifically it's closing value
                         stock.value = parseFloat(tsObj[dates[0]]["4. close"]).toFixed(2);
                         stock.symbol = stock.symbol.toUpperCase();
                         let newData = that.state.data;
                         let exists = false;
+                        // Testing if stock is in the portfolio; if so, the row just gets updated
                         newData.forEach(function (st) {
                             if (st.symbol === stock.symbol) {
                                 exists = true;
@@ -74,19 +73,6 @@ class Portfolio extends Component {
         }
         return sum.toFixed(2);
     };
-
-    // getChartData = () => {
-    //     let chartData = {
-    //         labels: [],
-    //         data: []
-    //     };
-    //     const stocks = this.state.data;
-    //     for (let i = 0; i < stocks.length; i++) {
-    //         chartData.labels.push(stocks[i].symbol);
-    //         chartData.data.push(stocks[i].value);
-    //     }
-    //     return chartData;
-    // };
 
     render() {
         return (

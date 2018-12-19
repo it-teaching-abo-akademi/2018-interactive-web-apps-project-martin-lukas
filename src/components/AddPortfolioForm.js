@@ -10,12 +10,14 @@ class AddPortfolioForm extends Component {
         this.state = this.initialState;
     }
 
+    // The state gets updated every time the input changes
     handleChange = event => {
         this.setState({
             [event.target.name] : event.target.value
         });
     };
 
+    // Submit only if the field is not empty
     submitForm = () => {
         if (!(this.state.name === '')) {
             this.props.handleSubmit(this.state);
@@ -25,19 +27,19 @@ class AddPortfolioForm extends Component {
 
     render() {
         return (
-                <form onSubmit={e => { e.preventDefault(); }}>
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        className="name-input-field"
-                        value={this.state.name}
-                        onChange={this.handleChange} />
-                    <input
-                        type="button"
-                        value="Add portfolio"
-                        onClick={this.submitForm} />
-                </form>
+            <form onSubmit={e => { e.preventDefault(); }}>
+                <label>Name:</label>
+                <input
+                    type="text"
+                    name="name"
+                    className="name-input-field"
+                    value={this.state.name}
+                    onChange={this.handleChange} />
+                <input
+                    type="button"
+                    value="Add portfolio"
+                    onClick={this.submitForm} />
+            </form>
         );
     }
 }
