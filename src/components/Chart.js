@@ -33,7 +33,7 @@ class Chart extends Component {
             colors.push(this.getRandomColor());
         }
         for (let i = 0; i < symbols.length; i++) {
-            let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&outputsize=full&apikey=${API}`;
+            let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&outputsize=compact&apikey=${API}`;
             let xhr = new XMLHttpRequest();
             xhr.open("GET", url, true);
             xhr.onload = function (e) {
